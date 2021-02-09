@@ -1,9 +1,12 @@
+import path from 'path';
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
 import { MongoClient } from 'mongodb';
+import { Database } from '../lib/types';
 
-const password = '123456789qp';
-const url = `mongodb+srv://Goran7777:${password}@cluster0.xtc2o.mongodb.net/test?retryWrites=true&w=majority`;
+const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_USER_PASSWORD}@cluster0.xtc2o.mongodb.net/test?retryWrites=true&w=majority`;
 
-export const connectDatabase = async () => {
+export const connectDatabase = async (): Promise<Database> => {
   const client = await MongoClient.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

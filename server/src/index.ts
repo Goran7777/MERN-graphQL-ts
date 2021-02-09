@@ -1,9 +1,9 @@
+require('dotenv').config();
+
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { connectDatabase } from './database';
 import { typeDefs, resolvers } from './graphql';
-
-const port = process.env.PORT || 9000;
 
 // CORS
 // app.use((_req, res, next) => {
@@ -21,21 +21,17 @@ const port = process.env.PORT || 9000;
 /////////////////////////////////////////////////////////////////////////////
 
 const mount = async (app: Application) => {
-  try {
-    const db = await connectDatabase();
-    const server = new ApolloServer({
-      typeDefs,
-      resolvers,
-      context: () => ({ db }),
-    });
-    server.applyMiddleware({ app, path: '/api' });
-    app.listen(port, () => {
-      console.log(`Server running at ${port}`);
-    });
-    const listings = await db.listings.find({}).toArray();
-    console.log(listings);
-  } catch (error) {
-    console.log(error);
-  }
+  const db = await connectDatabase();
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: () => ({ db }),
+  });
+  server.applyMiddleware({ app, path: '/api' });
+  app.listen(process.env.PORT, () => {
+    console.log(`Server running at ${process.env.PORT}`);
+  });
+  // const listings = await db.listings.find({}).toArray();
+  // console.log(listings);
 };
 mount(express());
