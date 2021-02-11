@@ -1,4 +1,5 @@
 import { ObjectId, Collection } from 'mongodb';
+
 // mongo schema in ts
 export interface Listing {
   _id: ObjectId;
