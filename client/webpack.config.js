@@ -15,11 +15,14 @@ module.exports = (env) => {
     output: {
       path: path.join(__dirname, '/dist'),
       filename: 'build.js',
+      publicPath: '/',
     },
     devServer: {
       port: 3000,
+      open: true,
+      historyApiFallback: true,
       proxy: {
-        '/': {
+        '/api': {
           target: 'http://localhost:9000',
         },
       },
@@ -42,6 +45,10 @@ module.exports = (env) => {
         {
           test: /\.svg$/,
           use: ['@svgr/webpack'],
+        },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          loader: 'file-loader',
         },
       ],
     },

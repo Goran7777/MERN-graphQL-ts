@@ -1,5 +1,5 @@
 {
-  "name": "tinyhouse",
+  "name": "tinyhouse-client",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "",
@@ -12,7 +12,7 @@
     "test": "jest",
     "test-watch": "jest --watchAll",
     "codegen:schema": "npx apollo client:download-schema --endpoint=http://localhost:9000/api",
-    "codegen:generate": "npx apollo client:codegen  --localSchemaFile=schema.json --includes=src/**/*.tsx --target=typescript"
+    "codegen:generate": "npx apollo client:codegen  --localSchemaFile=schema.json --includes=src/**/*.ts --globalTypesFile=./src/lib/graphql/globalTypes.ts --target=typescript"
   },
   "devDependencies": {
     "@svgr/webpack": "^5.3.1",
@@ -24,6 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
     "babel-eslint": "^10.0.0",
+    "babel-plugin-import": "^1.13.3",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",
     "enzyme": "^3.10.0",
@@ -54,13 +55,16 @@
   },
   "dependencies": {
     "@types/graphql": "^14.5.0",
+    "@types/react-router-dom": "^5.1.7",
     "antd": "^4.12.3",
     "apollo-boost": "^0.4.9",
+    "file-loader": "^6.2.0",
     "graphql": "^15.5.0",
     "normalize.css": "^8.0.1",
     "react": "^16.10.2",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.10.2",
+    "react-router-dom": "^5.2.0",
     "typescript": "3.8.3"
   }
 }

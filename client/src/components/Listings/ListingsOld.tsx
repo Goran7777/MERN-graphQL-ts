@@ -2,13 +2,12 @@ import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from 'react-apollo';
 import { List, Avatar, Button, Spin, Alert } from 'antd';
-import { Listings as ListingsData } from './__generated__/Listings';
+import { Listings as ListingsData } from '../__generated__/Listings';
 import {
   DeleteListing as DeleteListingData,
   DeleteListingVariables,
-} from './__generated__/DeleteListing';
-import ListingsSkeleton from './ListingsSkeleton/ListingsSkeleton';
-import './Listings.scss';
+} from '../__generated__/DeleteListing';
+import ListingsSkeleton from './ListingsSkeleton';
 
 const LISTINGS = gql`
   query Listings {
@@ -40,7 +39,6 @@ interface Props {
 
 const Listings = ({ title }: Props) => {
   const { data, loading, error, refetch } = useQuery<ListingsData>(LISTINGS);
-  console.log(useQuery<ListingsData>(LISTINGS));
 
   const [
     deleteListing,
@@ -49,6 +47,7 @@ const Listings = ({ title }: Props) => {
 
   const handleDeleteListing = async (id: string) => {
     await deleteListing({ variables: { id } });
+
     refetch();
   };
 

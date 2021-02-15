@@ -5,21 +5,6 @@ import { ApolloServer } from 'apollo-server-express';
 import { connectDatabase } from './database';
 import { typeDefs, resolvers } from './graphql';
 
-// CORS
-// app.use((_req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-//   );
-//   res.setHeader(
-//     'Access-Control-Allow-Methods',
-//     'GET, POST, PATCH, DELETE, OPTIONS'
-//   );
-//   next();
-// });
-/////////////////////////////////////////////////////////////////////////////
-
 const mount = async (app: Application) => {
   const db = await connectDatabase();
   const server = new ApolloServer({
@@ -35,3 +20,18 @@ const mount = async (app: Application) => {
   // console.log(listings);
 };
 mount(express());
+
+// CORS
+// app.use((_req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+//   );
+//   res.setHeader(
+//     'Access-Control-Allow-Methods',
+//     'GET, POST, PATCH, DELETE, OPTIONS'
+//   );
+//   next();
+// });
+/////////////////////////////////////////////////////////////////////////////
